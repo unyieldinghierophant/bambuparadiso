@@ -230,6 +230,65 @@ textarea { min-height:90px; resize:vertical; }
 .conf-body { font-size:0.92rem; opacity:0.7; line-height:1.9; max-width:460px; margin:0 auto 2rem; }
 .conf-ref { display:inline-block; border:1px solid rgba(200,169,110,0.3); padding:0.6rem 1.6rem; font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:2.5rem; }
 
+/* ── HERO BOOKING BAR ──────────────────────────────────────── */
+.hero-booking-bar { display:flex; align-items:center; background:rgba(10,7,4,0.52); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border:1px solid rgba(250,248,243,0.17); border-radius:56px; padding:0.5rem 0.5rem 0.5rem 2rem; max-width:760px; width:100%; margin:0 auto; gap:0; }
+.hbb-field { display:flex; flex-direction:column; gap:0.15rem; flex:1; min-width:0; padding-right:1rem; }
+.hbb-label { font-size:0.55rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+.hbb-input { background:transparent; border:none; color:var(--ivory); font-family:'Lato',sans-serif; font-size:0.9rem; font-weight:300; outline:none; width:100%; cursor:pointer; padding:0; min-width:110px; }
+.hbb-input::-webkit-calendar-picker-indicator { filter:invert(0.75); cursor:pointer; opacity:0.6; }
+.hbb-sep { width:1px; height:34px; background:rgba(250,248,243,0.13); margin-right:1rem; flex-shrink:0; align-self:center; }
+.hbb-guests-wrap { display:flex; flex-direction:column; gap:0.15rem; padding-right:1rem; flex-shrink:0; }
+.hbb-guests-ctrl { display:flex; align-items:center; gap:0.7rem; color:var(--ivory); font-size:0.9rem; }
+.hbb-gbtn { background:rgba(250,248,243,0.07); border:1px solid rgba(250,248,243,0.16); color:rgba(250,248,243,0.7); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; line-height:1; transition:all 0.2s; padding:0; }
+.hbb-gbtn:hover { background:rgba(200,169,110,0.18); border-color:var(--gold); color:var(--gold); }
+.hbb-cta { background:var(--gold); color:var(--dusk); border:none; font-family:'Cinzel',serif; font-size:0.67rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.9rem 1.5rem; border-radius:50px; cursor:pointer; transition:all 0.3s; white-space:nowrap; flex-shrink:0; }
+.hbb-cta:hover { background:var(--sunset); color:var(--ivory); }
+.hbb-cta:disabled { opacity:0.55; cursor:not-allowed; }
+.hbb-msg { text-align:center; font-size:0.82rem; margin-top:0.9rem; min-height:1.3rem; transition:opacity 0.3s; opacity:0; }
+.hbb-msg.visible { opacity:1; }
+.hbb-msg.error { color:#f09090; }
+.hbb-msg.success { color:var(--gold); }
+.hbb-msg.info { color:rgba(250,248,243,0.6); }
+
+/* ── INQUIRY MODAL ─────────────────────────────────────────── */
+.inq-overlay { position:fixed; inset:0; background:rgba(10,7,4,0.8); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:200; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+.inq-overlay.open { opacity:1; pointer-events:auto; }
+.inq-card { background:var(--dusk); border:1px solid rgba(200,169,110,0.2); width:100%; max-width:480px; padding:2.6rem; position:relative; animation:fadeUp 0.4s both; border-radius:4px; max-height:90vh; overflow-y:auto; }
+.inq-close { position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:rgba(250,248,243,0.3); font-size:1.6rem; cursor:pointer; line-height:1; transition:color 0.2s; }
+.inq-close:hover { color:var(--ivory); }
+.inq-title { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-style:italic; color:var(--gold); margin-bottom:0.3rem; }
+.inq-summary { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(250,248,243,0.38); margin-bottom:1.4rem; padding-bottom:1.4rem; border-bottom:1px solid rgba(250,248,243,0.07); }
+.inq-avail-badge { display:inline-flex; align-items:center; gap:0.4rem; background:rgba(80,180,100,0.1); border:1px solid rgba(80,200,100,0.22); color:#7dd89a; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.28rem 0.75rem; border-radius:20px; margin-bottom:1.6rem; }
+.inq-form { display:flex; flex-direction:column; gap:0.95rem; }
+.inq-row { display:grid; grid-template-columns:1fr 1fr; gap:0.95rem; }
+.inq-field { display:flex; flex-direction:column; gap:0.3rem; }
+.inq-lbl { font-size:0.56rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); }
+.inq-inp { background:rgba(250,248,243,0.04); border:1px solid rgba(250,248,243,0.1); color:var(--ivory); padding:0.7rem 0.9rem; font-family:'Lato',sans-serif; font-size:0.88rem; font-weight:300; outline:none; transition:border-color 0.3s; border-radius:8px; width:100%; box-sizing:border-box; }
+.inq-inp:focus { border-color:rgba(200,169,110,0.45); background:rgba(200,169,110,0.04); }
+.inq-ta { min-height:72px; resize:vertical; }
+.inq-submit { background:var(--gold); color:var(--dusk); border:none; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.95rem; border-radius:12px; cursor:pointer; transition:all 0.3s; width:100%; margin-top:0.4rem; }
+.inq-submit:hover { background:var(--sunset); color:var(--ivory); }
+.inq-submit:disabled { opacity:0.55; cursor:not-allowed; }
+.inq-err-msg { font-size:0.78rem; color:#f09090; margin-top:-0.2rem; display:none; }
+.inq-err-msg.show { display:block; }
+.inq-confirm { text-align:center; padding:1rem 0; display:none; }
+.inq-confirm.show { display:block; }
+.inq-confirm-icon { font-size:2.4rem; display:block; margin-bottom:1rem; }
+.inq-confirm-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-style:italic; color:var(--gold); margin-bottom:0.5rem; }
+.inq-confirm-body { font-size:0.88rem; opacity:0.65; line-height:1.85; margin-bottom:1.5rem; }
+.inq-confirm-ref { display:inline-block; border:1px solid rgba(200,169,110,0.28); padding:0.5rem 1.4rem; font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; color:var(--gold); }
+
+@media(max-width:640px) {
+  .hero { height:auto; min-height:100svh; padding-top:5.5rem; padding-bottom:3.5rem; align-items:flex-start; }
+  .hero-content { padding:1.5rem; }
+  .hero-booking-bar { flex-direction:column; border-radius:20px; padding:1.4rem; align-items:stretch; }
+  .hbb-field, .hbb-guests-wrap { padding-right:0; padding-top:0.8rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(250,248,243,0.08); }
+  .hbb-sep { display:none; }
+  .hbb-cta { border-radius:12px; width:100%; padding:0.95rem; margin-top:0.8rem; text-align:center; }
+  .inq-row { grid-template-columns:1fr; }
+  .inq-card { padding:2rem 1.4rem; }
+}
+
 /* FOOTER */
 footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
 .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:4rem; max-width:1200px; margin:0 auto 4rem; }
@@ -285,7 +344,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
     <li><a href="#rooms" class="nav-link">Habitaciones</a></li>
     <li><a href="#experience" class="nav-link">Experiencia</a></li>
     <li><a href="#attractions" class="nav-link">Alrededores</a></li>
-    <li><a href="https://npreview-christian-garibay-arce.lodgify.com/" target="_blank" rel="noopener" class="nav-link nav-cta">Reservar</a></li>
+    <li><a href="#hero-booking" onclick="event.preventDefault();document.getElementById('hero-booking').scrollIntoView({behavior:'smooth'})" class="nav-link nav-cta">Reservar</a></li>
   </ul>
 </nav>
 
@@ -301,14 +360,28 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
     <h1 class="hero-title">Bambu Paradiso</h1>
     <p class="hero-subtitle">Bar &amp; Kitchen · Beach Club</p>
     <p class="hero-desc">Una experiencia inolvidable frente al mar en la mejor playa de la Costa Alegre — arquitectura de bambú, atardeceres únicos, y la tranquilidad del océano Pacífico.</p>
-    <div class="cta-group">
-      <a href="https://npreview-christian-garibay-arce.lodgify.com/" target="_blank" rel="noopener" class="btn-lodgify">
-        Reservar ahora
-      </a>
-      <a href="https://npreview-christian-garibay-arce.lodgify.com/" target="_blank" rel="noopener" class="btn-lodgify-outline">
-        Ver disponibilidad
-      </a>
+    <div id="hero-booking" class="hero-booking-bar">
+      <div class="hbb-field">
+        <span class="hbb-label">Entrada</span>
+        <input type="date" id="hbb-in" class="hbb-input">
+      </div>
+      <div class="hbb-sep"></div>
+      <div class="hbb-field">
+        <span class="hbb-label">Salida</span>
+        <input type="date" id="hbb-out" class="hbb-input">
+      </div>
+      <div class="hbb-sep"></div>
+      <div class="hbb-guests-wrap">
+        <span class="hbb-label">Huéspedes</span>
+        <div class="hbb-guests-ctrl">
+          <button class="hbb-gbtn" type="button" onclick="changeGuests(-1)">−</button>
+          <span id="hbb-gval">2</span>
+          <button class="hbb-gbtn" type="button" onclick="changeGuests(1)">+</button>
+        </div>
+      </div>
+      <button class="hbb-cta" id="hbb-submit" type="button" onclick="consultarDisponibilidad()">Consultar disponibilidad</button>
     </div>
+    <div id="hbb-msg" class="hbb-msg"></div>
   </div>
   <div class="hero-scroll">
     <span>Desliza</span>
@@ -396,7 +469,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
         <p class="room-desc">Habitación de planta baja con techo de palma y paredes de madera artesanal. Cama king size, sofá cama adicional, baño vestidor con tina y regadera. Hamaca interior incluida.</p>
         <div class="room-footer">
           <div class="room-price">$3,500 <span>MXN/noche</span></div>
-          <button class="btn-book-room" onclick="window.open('https://npreview-christian-garibay-arce.lodgify.com/','_blank','noopener')">Reservar</button>
+          <button class="btn-book-room" onclick="scrollToBooking('Recámara Bambú')">Reservar</button>
         </div>
       </div>
     </div>
@@ -431,7 +504,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
         <p class="room-desc">Suite de segundo nivel con terraza privada y vistas panorámicas al Pacífico. Cama king size, cama extra, hamaca propia y camastros en terraza con vista directa al atardecer.</p>
         <div class="room-footer">
           <div class="room-price">$4,800 <span>MXN/noche</span></div>
-          <button class="btn-book-room" onclick="window.open('https://npreview-christian-garibay-arce.lodgify.com/','_blank','noopener')">Reservar</button>
+          <button class="btn-book-room" onclick="scrollToBooking('Suite Atardecer')">Reservar</button>
         </div>
       </div>
     </div>
@@ -608,12 +681,12 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
   <p class="bottom-cta-title">Tu paradiso te espera</p>
   <p class="bottom-cta-sub">La Manzanilla · Costa Alegre · Jalisco</p>
   <div class="cta-group">
-    <a href="https://npreview-christian-garibay-arce.lodgify.com/" target="_blank" rel="noopener" class="btn-lodgify">
-      Reservar ahora
-    </a>
-    <a href="https://npreview-christian-garibay-arce.lodgify.com/" target="_blank" rel="noopener" class="btn-lodgify-outline">
+    <button class="btn-lodgify" onclick="document.getElementById('hero-booking').scrollIntoView({behavior:'smooth'})">
+      Solicitar reserva
+    </button>
+    <button class="btn-lodgify-outline" onclick="document.getElementById('hero-booking').scrollIntoView({behavior:'smooth'})">
       Ver disponibilidad
-    </a>
+    </button>
   </div>
 </div>
 
@@ -674,6 +747,17 @@ document.getElementById('checkout').min = today;
 document.getElementById('checkin').addEventListener('change', function() {
   document.getElementById('checkout').min = this.value;
 });
+// Hero booking bar date inputs
+(function() {
+  const inEl = document.getElementById('hbb-in');
+  const outEl = document.getElementById('hbb-out');
+  if (!inEl || !outEl) return;
+  inEl.min = today; outEl.min = today;
+  inEl.addEventListener('change', function() {
+    outEl.min = this.value;
+    if (outEl.value && outEl.value <= this.value) outEl.value = '';
+  });
+})();
 
 // Slider state
 const sliderState = {};
@@ -771,6 +855,196 @@ function resetBooking() {
   goToStep(1);
   document.getElementById('booking').scrollIntoView({behavior:'smooth'});
 }
+
+// ============================================================
+// HERO BOOKING BAR — availability check & inquiry flow
+// IMPORTANT: Replace WHATSAPP_OWNER with the owner's number
+//            Format: country code + number, no + or spaces
+//            Example: '521XXXXXXXXXX' for Mexico +52 1 XXX XXX XXXX
+// ============================================================
+const WHATSAPP_OWNER = '521XXXXXXXXXX'; // ← TODO: replace with real number
+const BOOKING_API    = '/api';           // Vercel serverless base path
+
+let hbbGuests = 2;
+
+function changeGuests(delta) {
+  hbbGuests = Math.max(1, Math.min(8, hbbGuests + delta));
+  document.getElementById('hbb-gval').textContent = hbbGuests;
+}
+
+function showHbbMsg(text, type) {
+  const el = document.getElementById('hbb-msg');
+  el.textContent = text;
+  el.className = 'hbb-msg visible ' + (type || '');
+}
+function hideHbbMsg() {
+  document.getElementById('hbb-msg').className = 'hbb-msg';
+}
+
+async function consultarDisponibilidad() {
+  const checkin  = document.getElementById('hbb-in').value;
+  const checkout = document.getElementById('hbb-out').value;
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  if (!checkin || !checkout) {
+    showHbbMsg('Por favor selecciona tus fechas de entrada y salida.', 'error'); return;
+  }
+  if (checkin < todayStr || checkout < todayStr) {
+    showHbbMsg('Las fechas no pueden ser en el pasado.', 'error'); return;
+  }
+  if (checkout <= checkin) {
+    showHbbMsg('La salida debe ser posterior a la entrada.', 'error'); return;
+  }
+
+  const btn = document.getElementById('hbb-submit');
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  showHbbMsg('Consultando disponibilidad...', 'info');
+
+  try {
+    const res  = await fetch(BOOKING_API + '/availability', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ checkin, checkout }),
+    });
+    const data = await res.json();
+
+    if (data.available) {
+      hideHbbMsg();
+      openInquiryModal(checkin, checkout);
+    } else {
+      showHbbMsg('Estas fechas no están disponibles. Intenta con otras.', 'error');
+    }
+  } catch (err) {
+    console.error(err);
+    showHbbMsg('No se pudo verificar la disponibilidad. Inténtalo de nuevo.', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Consultar disponibilidad';
+  }
+}
+
+function fmtDateEs(d) {
+  if (!d) return '—';
+  const [y, m, day] = d.split('-');
+  const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return parseInt(day) + ' ' + months[parseInt(m) - 1] + ' ' + y;
+}
+
+function openInquiryModal(checkin, checkout) {
+  document.getElementById('inq-summary').textContent =
+    fmtDateEs(checkin) + ' → ' + fmtDateEs(checkout) + '  ·  ' +
+    hbbGuests + ' huésped' + (hbbGuests > 1 ? 'es' : '');
+  document.getElementById('inq-form-view').style.display = 'block';
+  document.getElementById('inq-confirm-view').classList.remove('show');
+  document.getElementById('inq-err-msg').classList.remove('show');
+  document.getElementById('inq-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInquiry() {
+  document.getElementById('inq-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+async function submitInquiry() {
+  const checkin  = document.getElementById('hbb-in').value;
+  const checkout = document.getElementById('hbb-out').value;
+  const nombre   = document.getElementById('inq-nombre').value.trim();
+  const wa       = document.getElementById('inq-wa').value.trim();
+  const email    = document.getElementById('inq-email').value.trim();
+  const mensaje  = document.getElementById('inq-msgtxt').value.trim();
+  const errEl    = document.getElementById('inq-err-msg');
+
+  if (!nombre || !wa || !email) {
+    errEl.textContent = 'Por favor completa nombre, WhatsApp y correo.';
+    errEl.classList.add('show'); return;
+  }
+  errEl.classList.remove('show');
+
+  const btn = document.getElementById('inq-submit');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+
+  // Generate reference number (also generated server-side; this is for display)
+  const ref = 'BP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+  try {
+    const res  = await fetch(BOOKING_API + '/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ checkin, checkout, guests: hbbGuests, nombre, whatsapp: wa, correo: email, mensaje }),
+    });
+    const data = await res.json();
+    if (!data.success && !data.ok) throw new Error(data.error || 'Error del servidor');
+
+    // Show confirmation
+    document.getElementById('inq-ref').textContent = 'REF: ' + (data.ref || ref);
+    document.getElementById('inq-form-view').style.display = 'none';
+    document.getElementById('inq-confirm-view').classList.add('show');
+
+    // Open WhatsApp with prefilled message to owner
+    const waText =
+      '🏡 *Bambu Paradiso* — Nueva solicitud de reserva\n\n' +
+      '👤 *Nombre:* ' + nombre + '\n' +
+      '📅 *Entrada:* ' + fmtDateEs(checkin) + '\n' +
+      '📅 *Salida:* '  + fmtDateEs(checkout) + '\n' +
+      '👥 *Huéspedes:* ' + hbbGuests + '\n' +
+      '📱 *WhatsApp:* ' + wa + '\n' +
+      '📧 *Correo:* '   + email +
+      (mensaje ? '\n💬 *Mensaje:* ' + mensaje : '') +
+      '\n\n🔖 Ref: ' + (data.ref || ref);
+    setTimeout(function() {
+      window.open('https://wa.me/' + WHATSAPP_OWNER + '?text=' + encodeURIComponent(waText), '_blank');
+    }, 600);
+
+  } catch (err) {
+    console.error(err);
+    errEl.textContent = 'Ocurrió un error. Por favor intenta de nuevo.';
+    errEl.classList.add('show');
+    btn.disabled = false; btn.textContent = 'Solicitar reserva';
+  }
+}
 </script>
+
+<!-- INQUIRY MODAL -->
+<div id="inq-overlay" class="inq-overlay" onclick="if(event.target===this)closeInquiry()">
+  <div class="inq-card">
+    <button class="inq-close" onclick="closeInquiry()" type="button">&#215;</button>
+    <!-- Form view -->
+    <div id="inq-form-view">
+      <p class="inq-title">Solicitar reserva</p>
+      <p id="inq-summary" class="inq-summary">— &rarr; — &nbsp;&middot;&nbsp; 2 hu&eacute;spedes</p>
+      <span class="inq-avail-badge">&#10003; &nbsp;Fechas disponibles</span>
+      <div class="inq-form">
+        <div class="inq-row">
+          <div class="inq-field">
+            <label class="inq-lbl" for="inq-nombre">Nombre</label>
+            <input id="inq-nombre" type="text" class="inq-inp" placeholder="Tu nombre completo">
+          </div>
+          <div class="inq-field">
+            <label class="inq-lbl" for="inq-wa">WhatsApp</label>
+            <input id="inq-wa" type="tel" class="inq-inp" placeholder="+52 ...">
+          </div>
+        </div>
+        <div class="inq-field">
+          <label class="inq-lbl" for="inq-email">Correo electr&oacute;nico</label>
+          <input id="inq-email" type="email" class="inq-inp" placeholder="tu@correo.com">
+        </div>
+        <div class="inq-field">
+          <label class="inq-lbl" for="inq-msgtxt">Mensaje <span style="opacity:0.4">(opcional)</span></label>
+          <textarea id="inq-msgtxt" class="inq-inp inq-ta" placeholder="Preferencias, preguntas..."></textarea>
+        </div>
+        <button id="inq-submit" class="inq-submit" type="button" onclick="submitInquiry()">Solicitar reserva</button>
+        <p id="inq-err-msg" class="inq-err-msg"></p>
+      </div>
+    </div>
+    <!-- Confirmation view -->
+    <div id="inq-confirm-view" class="inq-confirm">
+      <span class="inq-confirm-icon">&#10003;</span>
+      <p class="inq-confirm-title">&iexcl;Solicitud enviada!</p>
+      <p class="inq-confirm-body">Recibimos tu solicitud de reserva. Nos pondremos en contacto v&iacute;a WhatsApp a la brevedad para confirmar tu estad&iacute;a en Bambu Paradiso.</p>
+      <span id="inq-ref" class="inq-confirm-ref">BP-XXXXXX</span>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
