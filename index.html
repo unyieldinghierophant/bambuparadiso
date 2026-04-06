@@ -201,10 +201,11 @@ select option { background:var(--dusk); }
 input:focus,select:focus,textarea:focus { border-color:var(--gold); background:rgba(200,169,110,0.06); }
 input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.7); cursor:pointer; }
 textarea { min-height:90px; resize:vertical; }
-.form-btn-row { display:flex; justify-content:flex-end; margin-top:2rem; }
-.btn-next { background:var(--gold); color:var(--dusk); border:none; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; padding:1rem 2.4rem; cursor:pointer; transition:all 0.3s; }
+.form-btn-row { display:flex; justify-content:space-between; margin-top:2rem; }
+.form-btn-row.single { justify-content:flex-end; }
+.btn-next { background:var(--gold); color:var(--dusk); border:none; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; padding:1rem 2.4rem; cursor:pointer; transition:all 0.3s; border-radius:13px; }
 .btn-next:hover { background:var(--sunset); color:var(--ivory); }
-.btn-back { background:transparent; color:rgba(250,248,243,0.55); border:1px solid rgba(250,248,243,0.2); font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; padding:1rem 2rem; cursor:pointer; transition:all 0.3s; margin-right:1rem; }
+.btn-back { background:transparent; color:rgba(250,248,243,0.55); border:1px solid rgba(250,248,243,0.2); font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; padding:1rem 2rem; cursor:pointer; transition:all 0.3s; margin-right:1rem; border-radius:13px; }
 .btn-back:hover { border-color:var(--gold); color:var(--gold); }
 .room-select-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-bottom:2rem; }
 .room-option { border:1.5px solid rgba(250,248,243,0.1); padding:1.4rem; cursor:pointer; transition:all 0.3s; }
@@ -261,6 +262,16 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
   .guest-form { grid-template-columns:1fr; }
   .btn-outline { margin-left:0; margin-top:1rem; display:block; }
   .intro-strip { gap:2rem; }
+  /* Booking mobile */
+  .booking-section { padding:3.5rem 1.2rem; }
+  .booking-header { margin-bottom:2rem; }
+  .booking-form { padding:1.4rem 1.2rem; }
+  .booking-steps { margin-bottom:2rem; }
+  .step-line { min-width:28px; margin:0 0.45rem; }
+  .form-row { grid-template-columns:1fr; gap:0.85rem; margin-bottom:0.85rem; }
+  .booking-form input, .booking-form select { padding:0.65rem 0.85rem; font-size:0.88rem; }
+  .form-btn-row, .form-btn-row.single { flex-direction:column; gap:0.6rem; justify-content:flex-start; }
+  .btn-next, .btn-back { width:100%; text-align:center; padding:0.875rem 1.5rem; margin-right:0; box-sizing:border-box; min-height:48px; }
 }
 </style>
 </head>
@@ -530,7 +541,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
             <select id="room-pref"><option value="">Sin preferencia</option><option value="Recámara Bambú">Recámara Bambú — $3,500</option><option value="Suite Atardecer">Suite Atardecer — $4,800</option></select>
           </div>
         </div>
-        <div class="form-btn-row"><button class="btn-next" onclick="goToStep(2)">Siguiente →</button></div>
+        <div class="form-btn-row single"><button class="btn-next" onclick="goToStep(2)">Siguiente →</button></div>
       </div>
     </div>
 
@@ -549,7 +560,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
           <div class="room-option-desc">King + cama extra · Terraza privada · Vista al Pacífico</div>
         </div>
       </div>
-      <div class="form-btn-row" style="justify-content:space-between;margin-top:1rem;">
+      <div class="form-btn-row" style="margin-top:1rem;">
         <button class="btn-back" onclick="goToStep(1)">← Atrás</button>
         <button class="btn-next" onclick="goToStep(3)">Siguiente →</button>
       </div>
@@ -571,7 +582,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
           <div class="form-group"><label>WhatsApp</label><input type="tel" id="g-tel" placeholder="+52 33 0000 0000"></div>
           <div class="form-group full"><label>Solicitudes especiales</label><textarea id="g-notes" placeholder="¿Celebración, alergias, solicitudes...?"></textarea></div>
         </div>
-        <div class="form-btn-row" style="justify-content:space-between;">
+        <div class="form-btn-row">
           <button class="btn-back" onclick="goToStep(2)">← Atrás</button>
           <button class="btn-next" onclick="confirmBooking()">Confirmar reservación ✓</button>
         </div>
