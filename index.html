@@ -250,34 +250,6 @@ textarea { min-height:90px; resize:vertical; }
 .hbb-msg.success { color:var(--gold); }
 .hbb-msg.info { color:rgba(250,248,243,0.6); }
 
-/* ── INQUIRY MODAL ─────────────────────────────────────────── */
-.inq-overlay { position:fixed; inset:0; background:rgba(10,7,4,0.8); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:200; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.3s; }
-.inq-overlay.open { opacity:1; pointer-events:auto; }
-.inq-card { background:var(--dusk); border:1px solid rgba(200,169,110,0.2); width:100%; max-width:480px; padding:2.6rem; position:relative; animation:fadeUp 0.4s both; border-radius:4px; max-height:90vh; overflow-y:auto; }
-.inq-close { position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:rgba(250,248,243,0.3); font-size:1.6rem; cursor:pointer; line-height:1; transition:color 0.2s; }
-.inq-close:hover { color:var(--ivory); }
-.inq-title { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-style:italic; color:var(--gold); margin-bottom:0.3rem; }
-.inq-summary { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(250,248,243,0.38); margin-bottom:1.4rem; padding-bottom:1.4rem; border-bottom:1px solid rgba(250,248,243,0.07); }
-.inq-avail-badge { display:inline-flex; align-items:center; gap:0.4rem; background:rgba(80,180,100,0.1); border:1px solid rgba(80,200,100,0.22); color:#7dd89a; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.28rem 0.75rem; border-radius:20px; margin-bottom:1.6rem; }
-.inq-form { display:flex; flex-direction:column; gap:0.95rem; }
-.inq-row { display:grid; grid-template-columns:1fr 1fr; gap:0.95rem; }
-.inq-field { display:flex; flex-direction:column; gap:0.3rem; }
-.inq-lbl { font-size:0.56rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); }
-.inq-inp { background:rgba(250,248,243,0.04); border:1px solid rgba(250,248,243,0.1); color:var(--ivory); padding:0.7rem 0.9rem; font-family:'Lato',sans-serif; font-size:0.88rem; font-weight:300; outline:none; transition:border-color 0.3s; border-radius:8px; width:100%; box-sizing:border-box; }
-.inq-inp:focus { border-color:rgba(200,169,110,0.45); background:rgba(200,169,110,0.04); }
-.inq-ta { min-height:72px; resize:vertical; }
-.inq-submit { background:var(--gold); color:var(--dusk); border:none; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.95rem; border-radius:12px; cursor:pointer; transition:all 0.3s; width:100%; margin-top:0.4rem; }
-.inq-submit:hover { background:var(--sunset); color:var(--ivory); }
-.inq-submit:disabled { opacity:0.55; cursor:not-allowed; }
-.inq-err-msg { font-size:0.78rem; color:#f09090; margin-top:-0.2rem; display:none; }
-.inq-err-msg.show { display:block; }
-.inq-confirm { text-align:center; padding:1rem 0; display:none; }
-.inq-confirm.show { display:block; }
-.inq-confirm-icon { font-size:2.4rem; display:block; margin-bottom:1rem; }
-.inq-confirm-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-style:italic; color:var(--gold); margin-bottom:0.5rem; }
-.inq-confirm-body { font-size:0.88rem; opacity:0.65; line-height:1.85; margin-bottom:1.5rem; }
-.inq-confirm-ref { display:inline-block; border:1px solid rgba(200,169,110,0.28); padding:0.5rem 1.4rem; font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; color:var(--gold); }
-
 @media(max-width:640px) {
   .hero { height:auto; min-height:100svh; padding-top:5.5rem; padding-bottom:3.5rem; align-items:flex-start; }
   .hero-content { padding:1.5rem; }
@@ -285,8 +257,6 @@ textarea { min-height:90px; resize:vertical; }
   .hbb-field, .hbb-guests-wrap { padding-right:0; padding-top:0.8rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(250,248,243,0.08); }
   .hbb-sep { display:none; }
   .hbb-cta { border-radius:12px; width:100%; padding:0.95rem; margin-top:0.8rem; text-align:center; }
-  .inq-row { grid-template-columns:1fr; }
-  .inq-card { padding:2rem 1.4rem; }
 }
 
 /* FOOTER */
@@ -379,7 +349,7 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
           <button class="hbb-gbtn" type="button" onclick="changeGuests(1)">+</button>
         </div>
       </div>
-      <button class="hbb-cta" id="hbb-submit" type="button" onclick="consultarDisponibilidad()">Consultar disponibilidad</button>
+      <button class="hbb-cta" id="hbb-submit" type="button" onclick="reservarConLodgify()">Consultar disponibilidad</button>
     </div>
     <div id="hbb-msg" class="hbb-msg"></div>
   </div>
@@ -648,30 +618,13 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
         <div class="summary-row"><span class="summary-key">Noches</span><span id="sum-nights">—</span></div>
         <div class="summary-row"><span class="summary-key">Huéspedes</span><span id="sum-guests">—</span></div>
         <div class="summary-total"><span class="summary-total-label">Total estimado</span><span class="summary-total-val" id="sum-total">—</span></div>
-        <div class="guest-form">
-          <div class="form-group"><label>Nombre</label><input type="text" id="g-name" placeholder="Tu nombre"></div>
-          <div class="form-group"><label>Apellido</label><input type="text" id="g-last" placeholder="Tu apellido"></div>
-          <div class="form-group"><label>Email</label><input type="email" id="g-email" placeholder="correo@ejemplo.com"></div>
-          <div class="form-group"><label>WhatsApp</label><input type="tel" id="g-tel" placeholder="+52 33 0000 0000"></div>
-          <div class="form-group full"><label>Solicitudes especiales</label><textarea id="g-notes" placeholder="¿Celebración, alergias, solicitudes...?"></textarea></div>
-        </div>
         <div class="form-btn-row">
           <button class="btn-back" onclick="goToStep(2)">← Atrás</button>
-          <button class="btn-next" onclick="confirmBooking()">Confirmar reservación ✓</button>
+          <button class="btn-next" onclick="confirmarEnLodgify()">Reservar en Lodgify →</button>
         </div>
       </div>
     </div>
 
-    <div class="booking-panel" id="panel-4">
-      <div class="confirmation">
-        <span class="conf-icon">🌴</span>
-        <h3 class="conf-title">¡Reservación confirmada!</h3>
-        <div class="conf-ref" id="conf-ref-num">REF: BP-000000</div>
-        <p class="conf-body">Gracias por elegir Bambu Paradiso. Recibirás confirmación a tu correo y WhatsApp en las próximas horas con detalles de llegada e instrucciones de pago.</p>
-        <p class="conf-body" style="color:var(--gold);opacity:1;">Nos vemos en la Costa Alegre. 🌊</p>
-        <button class="btn-next" onclick="resetBooking()">Hacer otra reservación</button>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -838,32 +791,22 @@ function updateSteps(current) {
     else if(i===current) ind.classList.add('active');
   }
 }
-function confirmBooking() {
-  const name=document.getElementById('g-name').value.trim();
-  const email=document.getElementById('g-email').value.trim();
-  if(!name||!email) { alert('Por favor ingresa tu nombre y correo electrónico.'); return; }
-  const ref='BP-'+Math.random().toString(36).substr(2,6).toUpperCase();
-  document.getElementById('conf-ref-num').textContent='REF: '+ref;
-  document.querySelectorAll('.booking-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-4').classList.add('active');
-  for(let i=1;i<=3;i++) { const ind=document.getElementById('step-ind-'+i); ind.classList.remove('active'); ind.classList.add('done'); }
+function confirmarEnLodgify() {
+  const ci=document.getElementById('checkin').value;
+  const co=document.getElementById('checkout').value;
+  const g=document.getElementById('guests').value;
+  window.open(buildLodgifyUrl(ci||'', co||'', g||2), '_blank', 'noopener');
 }
 function resetBooking() {
   selectedRoom=null; selectedPrice=0;
-  ['checkin','checkout','g-name','g-last','g-email','g-tel','g-notes'].forEach(id=>document.getElementById(id).value='');
+  ['checkin','checkout'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   document.querySelectorAll('.room-option').forEach(r=>r.classList.remove('selected'));
   goToStep(1);
   document.getElementById('booking').scrollIntoView({behavior:'smooth'});
 }
 
-// ============================================================
-// HERO BOOKING BAR — availability check & inquiry flow
-// IMPORTANT: Replace WHATSAPP_OWNER with the owner's number
-//            Format: country code + number, no + or spaces
-//            Example: '521XXXXXXXXXX' for Mexico +52 1 XXX XXX XXXX
-// ============================================================
-const WHATSAPP_OWNER = '521XXXXXXXXXX'; // ← TODO: replace with real number
-const BOOKING_API    = '/api';           // Vercel serverless base path
+// ── HERO BOOKING BAR ──────────────────────────────────────────────────────────
+const LODGIFY_URL = 'https://npreview-christian-garibay-arce.lodgify.com/';
 
 let hbbGuests = 2;
 
@@ -881,45 +824,26 @@ function hideHbbMsg() {
   document.getElementById('hbb-msg').className = 'hbb-msg';
 }
 
-async function consultarDisponibilidad() {
+function buildLodgifyUrl(checkin, checkout, guests) {
+  return LODGIFY_URL + '?check_in=' + checkin + '&check_out=' + checkout + '&guests=' + guests;
+}
+
+function reservarConLodgify() {
   const checkin  = document.getElementById('hbb-in').value;
   const checkout = document.getElementById('hbb-out').value;
   const todayStr = new Date().toISOString().split('T')[0];
 
   if (!checkin || !checkout) {
-    showHbbMsg('Por favor selecciona tus fechas de entrada y salida.', 'error'); return;
+    showHbbMsg('Selecciona tus fechas de entrada y salida.', 'error'); return;
   }
-  if (checkin < todayStr || checkout < todayStr) {
-    showHbbMsg('Las fechas no pueden ser en el pasado.', 'error'); return;
+  if (checkin < todayStr) {
+    showHbbMsg('La fecha de entrada no puede ser en el pasado.', 'error'); return;
   }
   if (checkout <= checkin) {
     showHbbMsg('La salida debe ser posterior a la entrada.', 'error'); return;
   }
-
-  const btn = document.getElementById('hbb-submit');
-  btn.disabled = true; btn.textContent = 'Verificando...';
-  showHbbMsg('Consultando disponibilidad...', 'info');
-
-  try {
-    const res  = await fetch(BOOKING_API + '/availability', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ checkin, checkout }),
-    });
-    const data = await res.json();
-
-    if (data.available) {
-      hideHbbMsg();
-      openInquiryModal(checkin, checkout);
-    } else {
-      showHbbMsg('Estas fechas no están disponibles. Intenta con otras.', 'error');
-    }
-  } catch (err) {
-    console.error(err);
-    showHbbMsg('No se pudo verificar la disponibilidad. Inténtalo de nuevo.', 'error');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Consultar disponibilidad';
-  }
+  hideHbbMsg();
+  window.open(buildLodgifyUrl(checkin, checkout, hbbGuests), '_blank', 'noopener');
 }
 
 function fmtDateEs(d) {
@@ -928,123 +852,7 @@ function fmtDateEs(d) {
   const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   return parseInt(day) + ' ' + months[parseInt(m) - 1] + ' ' + y;
 }
-
-function openInquiryModal(checkin, checkout) {
-  document.getElementById('inq-summary').textContent =
-    fmtDateEs(checkin) + ' → ' + fmtDateEs(checkout) + '  ·  ' +
-    hbbGuests + ' huésped' + (hbbGuests > 1 ? 'es' : '');
-  document.getElementById('inq-form-view').style.display = 'block';
-  document.getElementById('inq-confirm-view').classList.remove('show');
-  document.getElementById('inq-err-msg').classList.remove('show');
-  document.getElementById('inq-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeInquiry() {
-  document.getElementById('inq-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-async function submitInquiry() {
-  const checkin  = document.getElementById('hbb-in').value;
-  const checkout = document.getElementById('hbb-out').value;
-  const nombre   = document.getElementById('inq-nombre').value.trim();
-  const wa       = document.getElementById('inq-wa').value.trim();
-  const email    = document.getElementById('inq-email').value.trim();
-  const mensaje  = document.getElementById('inq-msgtxt').value.trim();
-  const errEl    = document.getElementById('inq-err-msg');
-
-  if (!nombre || !wa || !email) {
-    errEl.textContent = 'Por favor completa nombre, WhatsApp y correo.';
-    errEl.classList.add('show'); return;
-  }
-  errEl.classList.remove('show');
-
-  const btn = document.getElementById('inq-submit');
-  btn.disabled = true; btn.textContent = 'Enviando...';
-
-  // Generate reference number (also generated server-side; this is for display)
-  const ref = 'BP-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-
-  try {
-    const res  = await fetch(BOOKING_API + '/book', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ checkin, checkout, guests: hbbGuests, nombre, whatsapp: wa, correo: email, mensaje }),
-    });
-    const data = await res.json();
-    if (!data.success && !data.ok) throw new Error(data.error || 'Error del servidor');
-
-    // Show confirmation
-    document.getElementById('inq-ref').textContent = 'REF: ' + (data.ref || ref);
-    document.getElementById('inq-form-view').style.display = 'none';
-    document.getElementById('inq-confirm-view').classList.add('show');
-
-    // Open WhatsApp with prefilled message to owner
-    const waText =
-      '🏡 *Bambu Paradiso* — Nueva solicitud de reserva\n\n' +
-      '👤 *Nombre:* ' + nombre + '\n' +
-      '📅 *Entrada:* ' + fmtDateEs(checkin) + '\n' +
-      '📅 *Salida:* '  + fmtDateEs(checkout) + '\n' +
-      '👥 *Huéspedes:* ' + hbbGuests + '\n' +
-      '📱 *WhatsApp:* ' + wa + '\n' +
-      '📧 *Correo:* '   + email +
-      (mensaje ? '\n💬 *Mensaje:* ' + mensaje : '') +
-      '\n\n🔖 Ref: ' + (data.ref || ref);
-    setTimeout(function() {
-      window.open('https://wa.me/' + WHATSAPP_OWNER + '?text=' + encodeURIComponent(waText), '_blank');
-    }, 600);
-
-  } catch (err) {
-    console.error(err);
-    errEl.textContent = 'Ocurrió un error. Por favor intenta de nuevo.';
-    errEl.classList.add('show');
-    btn.disabled = false; btn.textContent = 'Solicitar reserva';
-  }
-}
 </script>
 
-<!-- INQUIRY MODAL -->
-<div id="inq-overlay" class="inq-overlay" onclick="if(event.target===this)closeInquiry()">
-  <div class="inq-card">
-    <button class="inq-close" onclick="closeInquiry()" type="button">&#215;</button>
-    <!-- Form view -->
-    <div id="inq-form-view">
-      <p class="inq-title">Solicitar reserva</p>
-      <p id="inq-summary" class="inq-summary">— &rarr; — &nbsp;&middot;&nbsp; 2 hu&eacute;spedes</p>
-      <span class="inq-avail-badge">&#10003; &nbsp;Fechas disponibles</span>
-      <div class="inq-form">
-        <div class="inq-row">
-          <div class="inq-field">
-            <label class="inq-lbl" for="inq-nombre">Nombre</label>
-            <input id="inq-nombre" type="text" class="inq-inp" placeholder="Tu nombre completo">
-          </div>
-          <div class="inq-field">
-            <label class="inq-lbl" for="inq-wa">WhatsApp</label>
-            <input id="inq-wa" type="tel" class="inq-inp" placeholder="+52 ...">
-          </div>
-        </div>
-        <div class="inq-field">
-          <label class="inq-lbl" for="inq-email">Correo electr&oacute;nico</label>
-          <input id="inq-email" type="email" class="inq-inp" placeholder="tu@correo.com">
-        </div>
-        <div class="inq-field">
-          <label class="inq-lbl" for="inq-msgtxt">Mensaje <span style="opacity:0.4">(opcional)</span></label>
-          <textarea id="inq-msgtxt" class="inq-inp inq-ta" placeholder="Preferencias, preguntas..."></textarea>
-        </div>
-        <button id="inq-submit" class="inq-submit" type="button" onclick="submitInquiry()">Solicitar reserva</button>
-        <p id="inq-err-msg" class="inq-err-msg"></p>
-      </div>
-    </div>
-    <!-- Confirmation view -->
-    <div id="inq-confirm-view" class="inq-confirm">
-      <span class="inq-confirm-icon">&#10003;</span>
-      <p class="inq-confirm-title">&iexcl;Solicitud enviada!</p>
-      <p class="inq-confirm-body">Recibimos tu solicitud de reserva. Nos pondremos en contacto v&iacute;a WhatsApp a la brevedad para confirmar tu estad&iacute;a en Bambu Paradiso.</p>
-      <span id="inq-ref" class="inq-confirm-ref">BP-XXXXXX</span>
-    </div>
-  </div>
-</div>
 
 </body>
-</html>
