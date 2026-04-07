@@ -29,7 +29,7 @@ nav.scrolled .nav-link { color:var(--dusk); }
 
 /* HERO */
 .hero { height:100vh; min-height:700px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.hero-bg { position:absolute; inset:0; background:url('./gallery.jpeg') center/cover no-repeat; animation:heroZoom 6s ease both; }
+.hero-bg { position:absolute; inset:0; background-image:url('./sunset-gallery.2.jpeg'); background-size:cover; background-position:center center; background-repeat:no-repeat; animation:heroZoom 6s ease both; }
 @keyframes heroZoom { to { transform:scale(1); } }
 .hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,7,4,0.45) 0%, rgba(10,7,4,0.2) 35%, rgba(10,7,4,0.72) 100%); }
 .hero-content { position:relative; z-index:2; text-align:center; color:var(--ivory); padding:2rem; animation:fadeUp 1.2s 0.3s both; }
@@ -48,8 +48,8 @@ nav.scrolled .nav-link { color:var(--dusk); }
 
 /* DAYLET WRAP */
 .room-wrap { display:flex; flex-direction:column; gap:0; }
-.daylet-wrap { width:100%; margin-top:2rem; }
-.daylet-wrap iframe { border-radius:12px; border:none; display:block; width:100%; }
+.daylet-wrap { width:100%; margin-top:2.5rem; padding:0 0 1.5rem; }
+.daylet-wrap iframe { border-radius:12px; border:none; display:block; width:100%; height:660px; overflow:hidden; }
 
 /* Bottom CTA (removed) */
 
@@ -57,14 +57,14 @@ nav.scrolled .nav-link { color:var(--dusk); }
 @media(max-width:900px) {
   .rooms-grid { grid-template-columns:1fr; gap:3rem; }
   .room-slider { height:240px; }
-  .daylet-wrap iframe { height:650px !important; }
+  .daylet-wrap iframe { height:620px; }
 }
 @media(max-width:640px) {
   section { padding:3.5rem 1.2rem; }
   .rooms-section { padding:3.5rem 1rem; }
   .room-body { padding:1.2rem 1rem 1.5rem; }
   .daylet-wrap { margin-top:1.5rem; }
-  .daylet-wrap iframe { height:600px !important; border-radius:8px; }
+  .daylet-wrap iframe { height:560px; border-radius:8px; }
   .btn-primary, .btn-outline { display:block; width:100%; text-align:center; }
   .intro-strip { gap:1.2rem; padding:1.5rem 1rem; }
   .strip-divider { display:none; }
@@ -387,7 +387,7 @@ iframe { max-width:100%; }
       </div>
     </div>
     <div class="daylet-wrap">
-      <iframe src="https://dayletus.com/embed/room/ad149728-ce00-4bfb-bc87-1be97080b50e" width="100%" height="800" frameborder="0" style="border-radius:12px;border:none;display:block;"></iframe>
+      <iframe src="https://dayletus.com/embed/room/ad149728-ce00-4bfb-bc87-1be97080b50e" width="100%" frameborder="0" style="border-radius:12px;border:none;display:block;width:100%;"></iframe>
     </div>
     </div>
 
@@ -424,7 +424,7 @@ iframe { max-width:100%; }
       </div>
     </div>
     <div class="daylet-wrap">
-      <iframe src="https://dayletus.com/embed/room/69178eab-cec4-4a20-932f-345f98d67235" width="100%" height="800" frameborder="0" style="border-radius:12px;border:none;display:block;"></iframe>
+      <iframe src="https://dayletus.com/embed/room/69178eab-cec4-4a20-932f-345f98d67235" width="100%" frameborder="0" style="border-radius:12px;border:none;display:block;width:100%;"></iframe>
     </div>
     </div>
 
@@ -435,7 +435,7 @@ iframe { max-width:100%; }
 <section id="experience" style="padding:0;">
   <div class="experience">
     <div class="exp-img">
-      <img src="./nighthutgallery.jpeg" alt="Cabaña Bambu Paradiso de noche" style="width:100%;height:100%;object-fit:cover;min-height:460px;">
+      <img src="./echaderosplaya-gallery.5.jpeg" alt="Playa Bambu Paradiso" style="width:100%;height:100%;object-fit:cover;min-height:460px;">
     </div>
     <div class="exp-content">
       <p class="section-tag">La experiencia</p>
@@ -624,13 +624,10 @@ function updateSlider(id, idx, total) {
 // Gallery
 (function(){
   var imgs = [
-    './stardrawing-gallery.1.jpeg',
     './sunset-gallery.2.jpeg',
-    './sunsettrees-gallery.3.jpeg',
     './nightsky-gallery.4.jpeg',
     './echaderosplaya-gallery.5.jpeg',
-    './casafachadabambu-gallery.6.jpeg',
-    './albercaatardecer-gallery.7.jpeg'
+    './casafachadabambu-gallery.6.jpeg'
   ];
   var grid = document.getElementById('galleryGrid');
   imgs.forEach(function(src, idx){
