@@ -62,7 +62,7 @@ nav.scrolled .nav-link { color:var(--dusk); }
 /* DAYLET WRAP */
 .room-wrap { display:flex; flex-direction:column; gap:0; }
 .daylet-wrap { width:100%; margin-top:2.5rem; padding:0 0 1.5rem; }
-.daylet-wrap iframe { border-radius:12px; border:none; display:block; width:100%; height:800px; overflow:hidden; }
+.daylet-wrap iframe { border-radius:12px; border:none; display:block; width:100%; height:800px; }
 
 /* Bottom CTA (removed) */
 
@@ -70,14 +70,14 @@ nav.scrolled .nav-link { color:var(--dusk); }
 @media(max-width:900px) {
   .rooms-grid { grid-template-columns:1fr; gap:3rem; }
   .room-slider { height:240px; }
-  .daylet-wrap iframe { height:700px; }
+  .daylet-wrap iframe { height:800px; }
 }
 @media(max-width:640px) {
   section { padding:3.5rem 1.2rem; }
   .rooms-section { padding:3.5rem 1rem; }
   .room-body { padding:1.2rem 1rem 1.5rem; }
   .daylet-wrap { margin-top:1.5rem; }
-  .daylet-wrap iframe { height:85vh; max-height:800px; min-height:560px; border-radius:8px; }
+  .daylet-wrap iframe { height:1050px; border-radius:8px; }
   .btn-primary, .btn-outline { display:block; width:100%; text-align:center; }
   .intro-strip { gap:1.2rem; padding:1.5rem 1rem; }
   .strip-divider { display:none; }
