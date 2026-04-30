@@ -4,12 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bambu Paradiso · Costalegre</title>
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --sand: #f5f0e8; --ivory: #faf8f3; --dusk: #1a1410;
   --palm: #2c3a2a; --gold: #c8a96e; --sunset: #d4744a; --mist: rgba(250,248,243,0.93);
+  --color-cream: #f4ead8;
+  --color-cream-soft: #e8dcc4;
+  --color-shadow: rgba(20, 12, 6, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-border-hover: rgba(255, 255, 255, 0.55);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -28,32 +43,134 @@ nav.scrolled .nav-link { color:var(--dusk); }
 .nav-cta:hover { background:var(--sunset); color:var(--ivory) !important; }
 
 /* HERO */
-.hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100%; }
+/* HERO */
+.hero { height: 100dvh; min-height: 700px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100%; }
 .hero-bg { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; z-index: 0; overflow: hidden; background: #000; max-width: none !important; }
 .hero-video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-width: 100%; min-height: 100%; max-width: none !important; }
-.hero-video-wrapper iframe { 
-  width: 100vw !important; 
-  height: 56.25vw !important; 
-  min-height: 100vh !important; 
-  min-width: 177.77vh !important; 
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%) scale(1.5) !important; 
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 12, 6, 0.55) 0%,
+    rgba(20, 12, 6, 0.15) 35%,
+    rgba(20, 12, 6, 0.25) 65%,
+    rgba(20, 12, 6, 0.75) 100%
+  );
   pointer-events: none;
-  border: none; 
-  max-width: none !important;
 }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,7,4,0.3) 0%, rgba(10,7,4,0.15) 35%, rgba(10,7,4,0.7) 100%); z-index: 1; }
-.hero-content { position:relative; z-index:2; text-align:center; color:var(--ivory); padding:2rem; animation:fadeUp 1.2s 0.3s both; }
-@keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
-.hero-tag { font-size:0.68rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem; }
-.hero-logo-circle { width:180px; height:180px; border-radius:50%; background:rgba(10,7,4,0.45); border:1.5px solid rgba(250,248,243,0.45); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; margin:0 auto 1.6rem; overflow:hidden; box-shadow:0 4px 40px rgba(0,0,0,0.4); transition:transform 0.3s; }
-.hero-logo-circle:hover { transform:scale(1.04); }
-.hero-logo-circle img { width:150px; height:150px; object-fit:contain; filter:brightness(0) invert(1); padding:10px; }
-.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3.2rem,7vw,6rem); font-style:italic; font-weight:300; line-height:1.05; margin-bottom:0.5rem; text-shadow:0 2px 24px rgba(0,0,0,0.35); }
-.hero-subtitle { font-family:'Cinzel',serif; font-size:0.82rem; letter-spacing:0.3em; color:var(--gold); margin-bottom:2.2rem; }
-.hero-desc { font-size:0.95rem; line-height:1.8; max-width:480px; margin:0 auto 3rem; opacity:0.9; text-shadow:0 1px 8px rgba(0,0,0,0.4); }
+
+.hero-content { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:3; text-align:center; display:flex; flex-direction:column; align-items:center; width:90%; max-width:520px; padding:0 1rem; }
+
+.hero__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 13vw, 4.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--color-cream);
+  text-shadow: 0 4px 30px rgba(20, 12, 6, 0.5);
+  text-align: center;
+  animation: rise 1s 0.5s both, fadeIn 1s 0.5s both;
+}
+
+.hero__subtitle {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 300;
+  font-size: 0.875rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-cream-soft);
+  margin-top: 1.25rem;
+  text-shadow: 0 2px 12px var(--color-shadow);
+  animation: rise 1s 0.7s both, fadeIn 1s 0.7s both;
+}
+
+.hero__cta-wrapper {
+  margin-top: 2.5rem;
+  animation: rise 1s 0.9s both, fadeIn 1s 0.9s both;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.15rem 2.5rem;
+  background: var(--glass-bg);
+  color: var(--color-cream);
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--glass-border);
+  border-radius: 2px;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(20, 12, 6, 0.25);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.hero__cta:hover,
+.hero__cta:active {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-1px);
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-cream-soft);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  z-index: 3;
+  animation: fadeIn 1s 1.4s both;
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, var(--color-cream-soft) 0%, transparent 100%);
+  animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%      { opacity: 1;   transform: scaleY(1.15); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .btn-primary { display:inline-block; background:var(--gold); color:var(--dusk); font-family:'Manrope',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:1rem 2.8rem; text-decoration:none; transition:all 0.3s; }
 .btn-primary:hover { background:var(--sunset); color:var(--ivory); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,116,74,0.4); }
 .btn-outline { display:inline-block; background:transparent; color:var(--ivory); border:1px solid rgba(250,248,243,0.5); font-family:'Manrope',sans-serif; font-size:0.78rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; padding:1rem 2.4rem; text-decoration:none; transition:all 0.3s; }
@@ -67,31 +184,9 @@ nav.scrolled .nav-link { color:var(--dusk); }
 /* Bottom CTA (removed) */
 
 /* MOBILE */
-@media(max-width:900px) {
-  .rooms-grid { grid-template-columns:1fr; gap:3rem; }
-  .room-slider { height:240px; }
-  .daylet-wrap iframe { height:800px; }
-}
-@media(max-width:640px) {
-  section { padding:3.5rem 1.2rem; }
-  .rooms-section { padding:3.5rem 1rem; }
-  .room-body { padding:1.2rem 1rem 1.5rem; }
-  .daylet-wrap { margin-top:1.5rem; }
-  .daylet-wrap iframe { height:1450px; border-radius:8px; }
-  .btn-primary, .btn-outline { display:block; width:100%; text-align:center; }
-  .intro-strip { gap:1.2rem; padding:1.5rem 1rem; }
-  .strip-divider { display:none; }
-  .about { gap:2rem; }
-  .about-images { height:280px; }
-  .exp-content { padding:2rem 1.2rem; }
-  .footer-grid { grid-template-columns:1fr; gap:2rem; }
-  .footer-bottom { flex-direction:column; gap:0.4rem; }
-  .hero-scroll { bottom:1.5rem; }
-}
 
-.hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--ivory); opacity:0.6; animation:bounce 2s infinite; }
-.hero-scroll span { font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; }
-@keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(6px); } }
+
+
 
 /* INTRO STRIP */
 .intro-strip { background:var(--palm); color:var(--ivory); padding:2rem 3rem; display:flex; align-items:center; justify-content:center; gap:4rem; text-align:center; flex-wrap:wrap; }
@@ -187,8 +282,8 @@ section { padding:7rem 3rem; }
 .location-map { width:100%; height:460px; border:none; display:block; }
 
 @media(max-width:640px) {
-  .hero { height:auto; min-height:100svh; padding-top:5.5rem; padding-bottom:3.5rem; align-items:flex-start; }
-  .hero-content { padding:1.2rem; }
+  .hero { height:100svh; min-height:600px; }
+  .hero-content { width:92%; max-width:420px; }
   .location-map { height:320px; }
 }
 
@@ -273,9 +368,52 @@ footer { background:var(--palm); color:var(--ivory); padding:5rem 3rem 3rem; }
 .bottom-cta-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-style:italic; }
 .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3.2rem,7vw,6rem); font-style:italic; font-weight:300; line-height:1.05; margin-bottom:0.5rem; text-shadow:0 2px 24px rgba(0,0,0,0.35); }
 /* Prevent horizontal overflow */
-* { max-width:100%; }
-img { max-width:100%; }
-iframe { max-width:100%; }
+* { box-sizing:border-box; }
+html, body { overflow-x:hidden; }
+img { max-width:100%; height:auto; }
+
+/* MOBILE OVERRIDES (Moved to bottom) */
+@media(max-width:900px) {
+  .rooms-grid { grid-template-columns:1fr; gap:3rem; }
+  .room-slider { height:240px; }
+}
+@media(max-width:640px) {
+  section { padding:3.5rem 1.2rem; }
+  .rooms-section { padding:3.5rem 0.5rem; overflow-x:hidden; }
+  .rooms-grid { width:100%; min-width:0; }
+  .room-wrap { width:100%; min-width:0; }
+  .room-card { width:100%; }
+  .room-slider { width:100%; }
+  .room-body { padding:1.2rem 1rem 1.5rem; }
+  .daylet-wrap {
+    margin-top:1.5rem;
+    width: 100%;
+    position: relative;
+    height: 1120px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .daylet-wrap iframe {
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    transform: scale(0.7);
+    transform-origin: top center;
+    width: 500px;
+    max-width: none;
+    height: 1600px;
+    border: none;
+  }
+  .btn-primary, .btn-outline { display:block; width:100%; text-align:center; }
+  .intro-strip { gap:1.2rem; padding:1.5rem 1rem; }
+  .strip-divider { display:none; }
+  .about { gap:2rem; }
+  .about-images { height:280px; }
+  .exp-content { padding:2rem 1.2rem; }
+  .footer-grid { grid-template-columns:1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; gap:0.4rem; }
+  .hero__scroll { bottom:1.5rem; }
+}
 </style>
 </head>
 <body>
@@ -296,28 +434,27 @@ iframe { max-width:100%; }
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg">
+  <div class="hero-bg" aria-hidden="true">
     <div class="hero-video-wrapper">
       <video src="./Video/background-optimized.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; pointer-events:none;"></video>
     </div>
   </div>
-  <div class="hero-overlay"></div>
+  <div class="hero__overlay"></div>
   <div class="hero-content">
-    <p class="hero-tag">Costa Alegre · La Manzanilla, Jalisco</p>
-    
-    <h1 class="hero-title">Bambu Paradiso</h1>
-    <p class="hero-subtitle">Bar &amp; Kitchen · Beach Club</p>
-    <a href="#rooms" class="btn-primary" onclick="event.preventDefault();document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">Reservar cuarto</a>
+    <h1 class="hero__title">Bambu<br>Paradiso</h1>
+    <p class="hero__subtitle">Beach Club &amp; Suites</p>
+    <div class="hero__cta-wrapper">
+      <a href="#rooms" class="hero__cta" aria-label="Reservar estancia" onclick="event.preventDefault();document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">
+        Reservar estancia
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
   </div>
-  <div class="hero-scroll">
-    <span>Desliza</span>
-    <svg width="14" height="22" viewBox="0 0 14 22" fill="none" stroke="currentColor" stroke-width="1.5">
-      <rect x="1" y="1" width="12" height="20" rx="6"/>
-      <circle cx="7" cy="6" r="1.5" fill="currentColor" stroke="none">
-        <animate attributeName="cy" values="6;14;6" dur="1.8s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
-      </circle>
-    </svg>
+  <div class="hero__scroll">
+    Desliza
+    <div class="hero__scroll-line"></div>
   </div>
 </section>
 
